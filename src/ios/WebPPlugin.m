@@ -1,6 +1,6 @@
 
 #import "WebPPlugin.h"
-#import "STWebP/STWebPDecoder.h"
+#import "STWebPDecoder.h"
 
 @implementation WebPPlugin
 
