@@ -21,7 +21,7 @@
     UIImage * image = [STWebPDecoder imageWithData:webpData scale:1 error:NULL];
     NSString * base64 = [NSString stringWithFormat:@"data:image/png;base64",[UIImagePNGRepresentation(image) base64EncodedStringWithOptions:0]];
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64];
-    [self.commandDelegate sendPluginResult:result callbackId:self.callbackID];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackID];
 }
 
 @end
