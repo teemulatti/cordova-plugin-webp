@@ -20,4 +20,4 @@ enum STWebPErrorCode {
 	STWebPDecodeFailure = 1,
 };
 
-#import <STWebPDecoder.h>
+#import "STWebPDecoder.h"

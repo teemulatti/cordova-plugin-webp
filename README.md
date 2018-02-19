@@ -1,3 +1,11 @@
+# cordova-plugin-webp
+
+This is a fork from dpogue/cordova-plugin-webp with some changes for iOS platform (for EULE use). The following changes have been made compared to forked original:
+
+* Removed browser UI component registration.
+
+* Added cordova plugin framework, and method to decode webp image from path/url and get it back as base64 encoded string.
+
 cordova-plugin-webp
 ===================
 
