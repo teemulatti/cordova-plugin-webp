@@ -9,10 +9,7 @@
 
 - (void) decodeWebp:(CDVInvokedUrlCommand*)command
 {
-    //!
-    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"ok"];
-    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-    return;
+    //ok here
     
     if ([command.arguments count] == 0) {
         CDVPluginResult *pluginResult;
@@ -22,11 +19,11 @@
     }
     
     NSString * const webpPath = [command.arguments objectAtIndex:0];
-    //NSData * const webpData = [[NSData alloc] initWithContentsOfFile:webpPath options:NSDataReadingMappedIfSafe error:NULL];
-    //UIImage * image = [STWebPDecoder imageWithData:webpData scale:1 error:NULL];
-    //NSString * base64 = [NSString stringWithFormat:@"data:image/png;base64,%@",[UIImagePNGRepresentation(image) //base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
-    //CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64];
-    //[self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+    NSData * const webpData = [[NSData alloc] initWithContentsOfFile:webpPath options:NSDataReadingMappedIfSafe error:NULL];
+    UIImage * image = [STWebPDecoder imageWithData:webpData scale:1 error:NULL];
+    NSString * base64 = [NSString stringWithFormat:@"data:image/png;base64,%@",[UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
 @end
