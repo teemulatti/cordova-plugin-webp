@@ -20,6 +20,4 @@ enum STWebPErrorCode {
 	STWebPDecodeFailure = 1,
 };
 
-#import <STWebP/STWebPDecoder.h>
-#import <STWebP/STWebPStreamingDecoder.h>
-#import <STWebP/STWebPURLProtocol.h>
+#import <STWebPDecoder.h>

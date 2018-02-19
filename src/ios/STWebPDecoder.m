@@ -6,21 +6,19 @@
 
 #import "STWebP.h"
 
-#import "lib/libwebp/src/webp/decode.h"
-
+#import <WebP/decode.h>
 
 static void STCGDataProviderReleaseDataCallbackFree(void * __unused info, const void *data, size_t __unused size) {
 	free((void *)data);
 }
 
-
 @implementation STWebPDecoder
 
-+ (NSImage *)imageWithData:(NSData *)data error:(NSError * __autoreleasing *)error {
++ (UIImage *)imageWithData:(NSData *)data error:(NSError * __autoreleasing *)error {
 	return [self imageWithData:data scale:1 error:error];
 }
 
-+ (NSImage *)imageWithData:(NSData *)data scale:(CGFloat)scale error:(NSError * __autoreleasing *)error {
++ (UIImage *)imageWithData:(NSData *)data scale:(CGFloat)scale error:(NSError * __autoreleasing *)error {
 	int w = 0, h = 0;
 	uint8_t *bitmapData = WebPDecodeBGRA(data.bytes, data.length, &w, &h);
 	if (!bitmapData) {
@@ -58,12 +56,7 @@ static void STCGDataProviderReleaseDataCallbackFree(void * __unused info, const 
 		return nil;
 	}
 
-	if (scale == 0) {
-		scale = 1;
-	}
-	NSSize const imageSize = (NSSize){ .width = w / scale, .height = h / scale };
-
-	NSImage *image = [[NSImage alloc] initWithCGImage:bitmap size:imageSize];
+	UIImage *image = [[UIImage alloc] initWithCGImage:bitmap scale:scale orientation:UIImageOrientationUp];
 	CFRelease(bitmap);
 
 	return image;

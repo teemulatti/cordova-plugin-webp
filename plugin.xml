@@ -27,6 +27,10 @@
 
         <source-file src="src/ios/WebPPlugin.m" />
         <header-file src="src/ios/WebPPlugin.h" />
+        
+        <source-file src="src/ios/STWebPDecoder.m" />
+        <header-file src="src/ios/STWebPDecoder.h" />
+        <header-file src="src/ios/STWebP.h" />
 
         <framework src="CoreGraphics.framework" />
         <framework src="src/ios/WebP.framework" custom="true" />

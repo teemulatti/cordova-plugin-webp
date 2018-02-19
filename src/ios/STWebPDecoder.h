@@ -8,17 +8,9 @@
 
 #import "STWebP.h"
 
-
 @interface STWebPDecoder : NSObject
 
-#if defined(STWEBP_UIKIT) && STWEBP_UIKIT
 + (UIImage *)imageWithData:(NSData *)data error:(NSError * __autoreleasing *)error;
 + (UIImage *)imageWithData:(NSData *)data scale:(CGFloat)scale error:(NSError * __autoreleasing *)error;
-#endif
-
-#if defined(STWEBP_APPKIT) && STWEBP_APPKIT
-+ (NSImage *)imageWithData:(NSData *)data error:(NSError * __autoreleasing *)error;
-+ (NSImage *)imageWithData:(NSData *)data scale:(CGFloat)scale error:(NSError * __autoreleasing *)error;
-#endif
 
 @end
