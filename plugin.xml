@@ -7,13 +7,17 @@
     <description>WebP support for iOS UIWebView</description>
     <keywords>cordova,ios,webp</keywords>
     <license>Mozilla Public License 2.0</license>
-    <repo>https://github.com/dpogue/cordova-plugin-webp.git</repo>
+    <repo>https://github.com/teemulatti/cordova-plugin-webp.git</repo>
 
     <engines>
         <engine name="cordova-ios" version=">= 3.0.0" />
     </engines>
 
     <platform name="ios">
+        <js-module src="www/webp-native.js" name="WebPPlugin">
+            <clobbers target="webpPlugin" />
+        </js-module>
+
         <config-file parent="/*" target="config.xml">
             <feature name="WebP">
                 <param name="ios-package" value="WebPPlugin" />
@@ -23,9 +27,6 @@
 
         <source-file src="src/ios/WebPPlugin.m" />
         <header-file src="src/ios/WebPPlugin.h" />
-
-        <source-file src="src/ios/WebPProtocol.m" />
-        <header-file src="src/ios/WebPProtocol.h" />
 
         <source-file src="src/ios/STWebPStreamingDecoder.m" />
         <header-file src="src/ios/STWebPStreamingDecoder.h" />

@@ -1,18 +1,27 @@
-//  This Source Code Form is subject to the terms of the Mozilla Public
-//  License, v. 2.0. If a copy of the MPL was not distributed with this
-//  file, You can obtain one at http://mozilla.org/MPL/2.0/.
-//
-//  Copyright (c) 2014 Darryl Pogue.
 
 #import "WebPPlugin.h"
-#import "WebPProtocol.h"
+#import <WebP/decode.h>
 
 @implementation WebPPlugin
 
 - (void) pluginInitialize {
+}
 
-    [NSURLProtocol registerClass:[WebPProtocol class]];
-
+- (void) decodeWebp:(CDVInvokedUrlCommand*)command
+{
+    if ([command.arguments count] == 0) {
+        CDVPluginResult *pluginResult;
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"No path provided"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        return;
+    }
+    
+    NSString * const webpPath = [command.arguments objectAtIndex:0];
+    NSData * const webpData = [[NSData alloc] initWithContentsOfFile:webpPath options:NSDataReadingMappedIfSafe error:NULL];
+    UIImage * image = [STWebPDecoder imageWithData:webpData scale:1 error:NULL];
+    NSString * base64 = [NSString stringWithFormat:@"data:image/png;base64",[UIImagePNGRepresentation(image) base64EncodedString]];
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64];
+    [self.commandDelegate sendPluginResult:result callbackId:self.callbackID];
 }
 
 @end
