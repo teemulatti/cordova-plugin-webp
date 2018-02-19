@@ -19,7 +19,7 @@
         </js-module>
 
         <config-file parent="/*" target="config.xml">
-            <feature name="WebP">
+            <feature name="WebPPlugin">
                 <param name="ios-package" value="WebPPlugin" />
                 <param name="onload" value="true" />
             </feature>
