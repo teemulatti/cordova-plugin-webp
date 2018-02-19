@@ -23,6 +23,7 @@
                 <param name="ios-package" value="WebPPlugin" />
                 <param name="onload" value="true" />
             </feature>
+            <plugin name="WebPPlugin" value="WebPPlugin"/>
         </config-file>
 
         <source-file src="src/ios/WebPPlugin.m" />
