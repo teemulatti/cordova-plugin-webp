@@ -4,7 +4,7 @@
     version="2.2.0">
 
     <name>WebP</name>
-    <description>WebP support for iOS UIWebView</description>
+    <description>WebP decoding from javascript for iOS</description>
     <keywords>cordova,ios,webp</keywords>
     <license>Mozilla Public License 2.0</license>
     <repo>https://github.com/teemulatti/cordova-plugin-webp.git</repo>

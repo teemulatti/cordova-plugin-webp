@@ -1,3 +1,4 @@
+// Teemu Lätti
 
 #import "WebPPlugin.h"
 #import "STWebPDecoder.h"

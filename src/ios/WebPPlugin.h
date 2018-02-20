@@ -1,3 +1,4 @@
+// Teemu Lätti
 
 #import <Cordova/CDVPlugin.h>
 
