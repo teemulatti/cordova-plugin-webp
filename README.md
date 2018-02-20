@@ -6,13 +6,6 @@ This is a fork from dpogue/cordova-plugin-webp with some changes for iOS platfor
 
 * Added cordova plugin framework, and method to decode webp image from path/url and get it back as base64 encoded string.
 
-cordova-plugin-webp
-===================
-
-Cordova Plugin to automatically add WebP support for iOS web views. Works for
-images referenced in HTML, CSS, or JS, including ones packaged with the app and
-loaded from the device filesystem.
-
 
 Installing
 ----------
