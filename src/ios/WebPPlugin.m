@@ -47,7 +47,7 @@
         return;
     }
 
-    // Return base64 string
+    // Return base64 encoded PNG image string
     CDVPluginResult * result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
