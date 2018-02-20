@@ -9,20 +9,46 @@
 
 - (void) decodeWebp:(CDVInvokedUrlCommand*)command
 {
-    //ok here
-    
+    // Webp path
     if ([command.arguments count] == 0) {
-        CDVPluginResult *pluginResult;
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"No path provided"];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        CDVPluginResult * result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"No path given"];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         return;
     }
-    
-    NSString * const webpPath = [command.arguments objectAtIndex:0];
-    NSData * const webpData = [[NSData alloc] initWithContentsOfFile:webpPath options:NSDataReadingMappedIfSafe error:NULL];
+    NSString * const path = [command.arguments objectAtIndex:0];
+    if ([path length] == 0) {
+        CDVPluginResult * result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Given path is empty"];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+
+    // Load webp from (possibly remote) path
+    NSData * const webpData = [[NSData alloc] initWithContentsOfFile:path options:NSDataReadingMappedIfSafe error:NULL];
+    if (webpData == nil) {
+        CDVPluginResult * result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Could not load webp"];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+
+    // Convert webp to image
     UIImage * image = [STWebPDecoder imageWithData:webpData scale:1 error:NULL];
-    NSString * base64 = [NSString stringWithFormat:@"data:image/png;base64,%@",[UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
-    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64];
+    if (image == nil) {
+        CDVPluginResult * result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Could not convert webp to image"];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+
+    // Convert image to base64 string
+    NSString * base64 = [NSString stringWithFormat:@"data:image/png;base64,%@",
+                         [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+    if (base64 == nil || [base64 length] == 0) {
+        CDVPluginResult * result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Could not convert image to base64"];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return;
+    }
+
+    // Return base64 string
+    CDVPluginResult * result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
