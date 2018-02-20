@@ -23,7 +23,7 @@
     }
 
     // Load webp from local file url
-    NSData * data = [NSData dataWithContentsOfURL:path];
+    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:path error:NULL]];
     if (data == nil) {
         CDVPluginResult * result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Could not load webp"];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
