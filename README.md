@@ -1,6 +1,6 @@
 # cordova-plugin-webp
 
-This is a fork from dpogue/cordova-plugin-webp with some changes for iOS platform (for EULE use). The following changes have been made compared to forked original:
+This is a fork from dpogue/cordova-plugin-webp with changes for iOS platform targetting EULE/android-js use. The following changes have been made compared to original:
 
 * Removed browser UI component registration.
 
