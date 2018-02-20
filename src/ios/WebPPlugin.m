@@ -22,16 +22,16 @@
         return;
     }
 
-    // Load webp from (possibly remote) path
-    NSData * const webpData = [[NSData alloc] initWithContentsOfFile:path options:NSDataReadingMappedIfSafe error:NULL];
-    if (webpData == nil) {
+    // Load webp from local file url
+    NSData * data = [NSData dataWithContentsOfURL:path];
+    if (data == nil) {
         CDVPluginResult * result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Could not load webp"];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         return;
     }
 
     // Convert webp to image
-    UIImage * image = [STWebPDecoder imageWithData:webpData scale:1 error:NULL];
+    UIImage * image = [STWebPDecoder imageWithData:data scale:1 error:NULL];
     if (image == nil) {
         CDVPluginResult * result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Could not convert webp to image"];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
